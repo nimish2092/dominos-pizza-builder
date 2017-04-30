@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pizza builder</title>
+	<link rel="stylesheet" href="./assets/stylesheets/index.css" media="screen" title="no title">
+	<script src="assets/scripts/jquery-3.1.1.min.js"></script>
+	<script src="assets/scripts/index.js"></script>
+</head>
+<body>
+	<div class="progressWrapper progress">
+	   <div class="leftEndcap progress__step progress__step--static is-hidden@handheld">(</div>
+	   <div class="step progress__step c-sizeCrust activeStep" id="sizeCrust">Size &amp; Crust</div>
+	   <div class="seperator progress__step progress__step--static activeSeperator">/</div>
+	   <div class="step progress__step c-cheeseSauce" id="cheeseSauce">Cheese &amp; Sauce</div>
+	   <div class="seperator progress__step progress__step--static" id="sp1">/</div>
+	   <div class="step progress__step c-toppings" id="toppings">Toppings</div>
+	   <div class="rightEndcap progress__step progress__step--static is-hidden@handheld">)</div>
+	</div>
+
+<!-- #################################################################################################################  -->
+
+	<div class="card card--pop card--pizza-options">
+   <div class="builderWrapper card__body">
+
+      <div id="sizeCrustWrapper" class="is-hidden grid js-sizeCrustWrapper" style="display: block;">
+         <div class="grid__cell--1">
+            <h2 class="step-title">Choose Size &amp; Crust</h2>
+         </div>
+         <div class="product grid__cell--1 grid__cell--1/4@desktop grid__cell--1@widescreen">
+            <h3 class="section-title">Hand Tossed</h3>
+            <p class="section-description">Garlic-seasoned crust with a rich, buttery taste.</p>
+            <div class="row"> <label> <input data-flavorcode="HANDTOSS" data-sizecode="10" name="S_PIZZA|Variant" type="radio" value="10SCREEN" class="c-crust-10SCREEN"> <span class="btn--toggle">Small (10")</span> </label> </div>
+            <div class="row"> <label> <input data-flavorcode="HANDTOSS" data-sizecode="12" name="S_PIZZA|Variant" type="radio" value="12SCREEN" class="c-crust-12SCREEN"> <span class="btn--toggle">Medium (12")</span> </label> </div>
+            <div class="row"> <label> <input data-flavorcode="HANDTOSS" data-sizecode="14" name="S_PIZZA|Variant" type="radio" value="14SCREEN" class="c-crust-14SCREEN"> <span class="btn--toggle">Large (14")</span> </label> </div>
+         </div>
+         <div class="product grid__cell--1 grid__cell--1/4@desktop grid__cell--1@widescreen">
+            <h3 class="section-title">Handmade Pan</h3>
+            <p class="section-description">Two layers of cheese, toppings to the edge, baked in a pan for a crust that is golden and crispy with a buttery taste.</p>
+            <div class="row"> <label> <input data-flavorcode="NPAN" data-sizecode="12" name="S_PIZZA|Variant" type="radio" value="P12IPAZA" class="c-crust-P12IPAZA"> <span class="btn--toggle">Medium (12")</span> </label> </div>
+         </div>
+         <div class="product grid__cell--1 grid__cell--1/4@desktop grid__cell--1@widescreen">
+            <h3 class="section-title">Crunchy Thin Crust</h3>
+            <p class="section-description">Thin enough for the optimum crispy to crunchy ratio.</p>
+            <div class="row"> <label> <input data-flavorcode="THIN" data-sizecode="12" name="S_PIZZA|Variant" type="radio" value="12THIN" class="c-crust-12THIN"> <span class="btn--toggle">Medium (12")</span> </label> </div>
+            <div class="row"> <label> <input data-flavorcode="THIN" data-sizecode="14" name="S_PIZZA|Variant" type="radio" value="14THIN" class="c-crust-14THIN"> <span class="btn--toggle">Large (14")</span> </label> </div>
+         </div>
+         <div class="product grid__cell--1 grid__cell--1/4@desktop grid__cell--1@widescreen">
+            <h3 class="section-title">Brooklyn Style</h3>
+            <p class="section-description">Hand stretched to be big, thin and perfectly foldable.</p>
+            <div class="row"> <label> <input data-flavorcode="BK" data-sizecode="14" name="S_PIZZA|Variant" type="radio" value="PBKIREZA" class="c-crust-PBKIREZA"> <span class="btn--toggle">Large (14")</span> </label> </div>
+            <div class="row"> <label> <input data-flavorcode="BK" data-sizecode="16" name="S_PIZZA|Variant" type="radio" value="P16IBKZA" class="c-crust-P16IBKZA"> <span class="btn--toggle">X-Large (16")</span> </label> </div>
+         </div>
+         <div class="product grid__cell--1 grid__cell--1/4@desktop grid__cell--1@widescreen" style="border: 0px; clear: left; min-height: 0px;">
+            <h3 class="section-title">Gluten Free Crust</h3>
+            <p class="section-description">Domino's pizza made with a Gluten Free Crust.</p>
+            <div class="row"> <label> <input data-flavorcode="GLUTENF" data-sizecode="10" name="S_PIZZA|Variant" type="radio" value="P10IGFZA" class="c-crust-P10IGFZA"> <span class="btn--toggle">Small (10")</span> </label> </div>
+         </div>
+      </div>
+      <div id="cheeseSauceWrapper" class="is-hidden grid" style="display: none;">
+         <div class="grid__cell--1">
+            <h2 class="step-title">Choose Cheese &amp; Sauce</h2>
+         </div>
+         <div class="product choose-cheese grid__cell--1 grid__cell--1/4@desktop">
+            <h3 class="section-title">Cheese?</h3>
+            <div class="topping cheese">
+               <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-C" name="S_PIZZA|Topping|C|SPLIT"> <span class="btn--toggle">Cheese</span> </label>
+               <div class="toppingSettings is-hidden" style="display: block;">
+                  <div class="topping split">
+                     <div class="LeftInactive portion c-toppingportion-C-Left"><input type="radio" aria-label="Cheese" name="Part|C--1" value="1/2"></div>
+                     <div class="WholeActive portion c-toppingportion-C-Whole"><input type="radio" aria-label="Cheese" name="Part|C--1" value="1/1"></div>
+                     <div class="RightInactive portion c-toppingportion-C-Right"><input type="radio" aria-label="Cheese" name="Part|C--1" value="2/2"></div>
+                  </div>
+                  <div class="topping split otherHalf is-hidden" style="display: none;">
+                     <div class="flex-wrapper">
+                        <div class="LeftInactive portion c-toppingportion-C-Left"><input type="radio" aria-label="Cheese" name="Part|C--2" value="1/2"></div>
+                        <div class="WholeInactive portion c-toppingportion-C-Whole"><input type="radio" aria-label="Cheese" name="Part|C--2" value="1/1"></div>
+                        <div class="RightInactive portion c-toppingportion-C-Right"><input type="radio" aria-label="Cheese" name="Part|C--2" value="2/2"></div>
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="product choose-sauce grid__cell--1 grid__cell--1/2@desktop grid__cell--1@widescreen" style="border: 0px;">
+            <h3 class="section-title">Choose a sauce</h3>
+            <div class="topping"> <label> <input type="checkbox" class="selectSauce" name="selectSauceToggle"> <span class="btn--toggle">Sauce</span> </label> </div>
+            <div class="toppingSettings sauceSelection">
+               <div class="topping sauce">
+                  <label> <input type="radio" class="selectTopping c-topping-X" name="S_PIZZA|Topping|X"> <span class="btn--toggle">Robust Inspired Tomato Sauce</span> </label>
+               </div>
+               <div class="topping sauce">
+                  <label> <input type="radio" class="selectTopping c-topping-Xm" name="S_PIZZA|Topping|Xm"> <span class="btn--toggle">Hearty Marinara Sauce</span> </label>
+
+               </div>
+               <div class="topping sauce">
+                  <label> <input type="radio" class="selectTopping c-topping-Bq" name="S_PIZZA|Topping|Bq"> <span class="btn--toggle">BBQ Sauce</span> </label>
+
+               </div>
+               <div class="topping sauce">
+                  <label> <input type="radio" class="selectTopping c-topping-Xw" name="S_PIZZA|Topping|Xw"> <span class="btn--toggle">Garlic Parmesan White Sauce</span> </label>
+
+               </div>
+               <div class="topping sauce">
+                  <label> <input type="radio" class="selectTopping c-topping-Xf" name="S_PIZZA|Topping|Xf"> <span class="btn--toggle">Alfredo Sauce</span> </label>
+
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="toppingsWrapper" class="is-hidden grid toppings-list" style="display: none;">
+         <div class="grid__cell--1">
+            <h2 class="step-title">Choose Toppings</h2>
+         </div>
+         <div class="product grid__cell--1/2@desktop grid__cell--1">
+            <h3 class="section-title">Choose Meats</h3>
+            <div class="grid">
+               <div class="toppingColumn grid__cell--1/2@desktop grid__cell--1">
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-P topping-P" name="S_PIZZA|Topping|P"> <span class="btn--toggle">Pepperoni</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Sb topping-Sb" name="S_PIZZA|Topping|Sb"> <span class="btn--toggle">Sliced Italian Sausage</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Pm topping-Pm" name="S_PIZZA|Topping|Pm"> <span class="btn--toggle">Philly Steak</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-K topping-K" name="S_PIZZA|Topping|K"> <span class="btn--toggle">Bacon</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Du topping-Du" name="S_PIZZA|Topping|Du"> <span class="btn--toggle">Premium Chicken</span> </label>
+
+                  </div>
+               </div>
+               <div class="toppingColumn grid__cell--1/2@desktop grid__cell--1">
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-S topping-S" name="S_PIZZA|Topping|S"> <span class="btn--toggle">Italian Sausage</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-B topping-B" name="S_PIZZA|Topping|B"> <span class="btn--toggle">Beef</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-H topping-H" name="S_PIZZA|Topping|H"> <span class="btn--toggle">Ham</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Sa topping-Sa" name="S_PIZZA|Topping|Sa"> <span class="btn--toggle">Salami</span> </label>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="product grid__cell--1/2@desktop grid__cell--1" style="border: 0px;">
+            <h3 class="section-title">Choose Non-meats</h3>
+            <div class="grid">
+               <div class="toppingColumn grid__cell--1/2@desktop grid__cell--1">
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-E topping-E" name="S_PIZZA|Topping|E"> <span class="btn--toggle">Cheddar Cheese</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Cs topping-Cs" name="S_PIZZA|Topping|Cs"> <span class="btn--toggle">Shredded Parmesan Asiago</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Z topping-Z" name="S_PIZZA|Topping|Z"> <span class="btn--toggle">Banana Peppers</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-F topping-F" name="S_PIZZA|Topping|F"> <span class="btn--toggle">Garlic</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-J topping-J" name="S_PIZZA|Topping|J"> <span class="btn--toggle">Jalapeno Peppers</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-N topping-N" name="S_PIZZA|Topping|N"> <span class="btn--toggle">Pineapple</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Rr topping-Rr" name="S_PIZZA|Topping|Rr"> <span class="btn--toggle">Roasted Red Peppers</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Td topping-Td" name="S_PIZZA|Topping|Td"> <span class="btn--toggle">Diced Tomatoes</span> </label>
+
+                  </div>
+               </div>
+               <div class="toppingColumn grid__cell--1/2@desktop grid__cell--1">
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Fe topping-Fe" name="S_PIZZA|Topping|Fe"> <span class="btn--toggle">Feta Cheese</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Cp topping-Cp" name="S_PIZZA|Topping|Cp"> <span class="btn--toggle">Shredded Provolone Cheese</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-R topping-R" name="S_PIZZA|Topping|R"> <span class="btn--toggle">Black Olives</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-G topping-G" name="S_PIZZA|Topping|G"> <span class="btn--toggle">Green Peppers</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-M topping-M" name="S_PIZZA|Topping|M"> <span class="btn--toggle">Mushrooms</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-O topping-O" name="S_PIZZA|Topping|O"> <span class="btn--toggle">Onions</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Si topping-Si" name="S_PIZZA|Topping|Si"> <span class="btn--toggle">Spinach</span> </label>
+
+                  </div>
+                  <div class="topping">
+                     <label class="form__control-group--toggle"> <input type="checkbox" class="selectTopping c-topping-Ht topping-Ht" name="S_PIZZA|Topping|Ht"> <span class="btn--toggle">Hot Sauce</span> </label>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+      google.charts.load('current', {'packages':['sankey','corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'From');
+        data.addColumn('string', 'To');
+        data.addColumn('number', 'Weight');
+        data.addRows([
+					[ 'Small', 'Premium chicken', 43 ],
+          [ 'Small', 'Italian Sausage', 21 ],
+          [ 'Small', 'Pepperoni', 34 ],
+          [ 'Small', 'Black olives', 42 ],
+          [ 'Small', 'Green Peppers', 52 ],
+          [ 'Small', 'Onions', 31 ],
+	  			[ 'Small', 'Mushrooms', 25 ],
+	  			[ 'Medium', 'Premium chicken', 12 ],
+          [ 'Medium', 'Italian Sausage', 42 ],
+          [ 'Medium', 'Pepperoni', 63 ],
+          [ 'Medium', 'Black olives', 13 ],
+          [ 'Medium', 'Green Peppers', 23 ],
+          [ 'Medium', 'Onions', 23 ],
+	  			[ 'Medium', 'Mushrooms', 12 ],
+					[ 'Large', 'Premium chicken', 43 ],
+          [ 'Large', 'Italian Sausage', 23 ],
+          [ 'Large', 'Pepperoni', 43 ],
+          [ 'Large', 'Black olives', 23 ],
+          [ 'Large', 'Green Peppers', 41 ],
+          [ 'Large', 'Onions', 62 ],
+	  			[ 'Large', 'Mushrooms', 21 ]
+        ]);
+
+        // Sets chart options.
+        var options = {
+          width: 400,
+        };
+
+        // Instantiates and draws our chart, passing in some options.
+        var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+        chart.draw(data, options);
+
+
+				google.charts.setOnLoadCallback(drawChart2);
+				function drawChart2() {
+
+					var data2 = google.visualization.arrayToDataTable([
+						['Toppings', 'Per Pizza'],
+						['Black olives',     2],
+						['Green peppers',      2],
+						['Mushrooms',  2],
+						['Onions', 2],
+						['Premium Chicken',    2]
+					]);
+
+					var options2 = {
+						title: 'Pizza Toppings'
+					};
+
+					var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+					chart.draw(data2, options2);
+				}
+
+      }
+    </script>
+		<div id="sankey_basic" style="width: 400px; height: 300px; display: none"></div>
+		<div id="piechart" style="width: 400px; height: 300px; display: none"></div>
+
+<div class="charts" style="display:none"><p>Charts</p></div>
+
+
+</body>
+</html>
